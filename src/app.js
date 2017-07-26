@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import ReduxThunk from 'redux-thunk';
+import { createStore, applyMiddleware } from 'redux';
 import firebase from 'firebase';
 
 import combineReducers from './reducers';
@@ -22,8 +23,10 @@ class App extends Component {
   }
 
   render() {
+    const store = createStore(combineReducers, {}, applyMiddleware(ReduxThunk));
+
     return (
-      <Provider store={createStore(combineReducers)}>
+      <Provider store={store}>
         <View>
           <LoginForm />
         </View>
