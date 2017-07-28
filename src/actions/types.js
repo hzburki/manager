@@ -3,3 +3,4 @@ export const PASSWORD_CHANGED = 'password_changed';
 export const LOGIN_USER = 'login_user';
 export const LOGIN_USER_FAIL = 'login_user_fail';
 export const LOGIN_USER_PENDING = 'login_user_pending';
+export const EMPLOYEE_DETAILS = 'employee_details';
