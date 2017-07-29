@@ -7,7 +7,7 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case FETCH_EMPLOYEE:
-      return INITIAL_STATE;
+      return action.payload;
     default:
       return state;
   }
