@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Picker, Text } from 'react-native';
 import { connect } from 'react-redux';
 
-import { Card, CardSection, Button, Input } from './common';
+import { Card, CardSection, Button } from './common';
+import EmployeeForm from './EmployeeForm';
 import { employeeDetails, employeeCreate } from '../actions';
 
 class AddEmployee extends Component {
@@ -15,40 +15,7 @@ class AddEmployee extends Component {
   render() {
     return (
       <Card>
-        <CardSection>
-          <Input
-            value={this.props.name}
-            label="Name"
-            placeHolder="Haseeb"
-            onChangeText={text => this.props.employeeDetails({ prop: 'name', value: text })}
-          />
-        </CardSection>
-
-        <CardSection>
-          <Input
-            onChangeText={text => this.props.employeeDetails({ prop: 'phone', value: text })}
-            value={this.props.phone}
-            label="Phone"
-            placeHolder="03005013068"
-          />
-        </CardSection>
-
-        <CardSection>
-          <Text style={styles.pickerLabelStyle}>Shifts</Text>
-          <Picker
-            style={{ flex: 3 }}
-            selectedValue={this.props.shift}
-            onValueChange={day => this.props.employeeDetails({ prop: 'shift', value: day })}
-          >
-            <Picker.Item label="Monday" value="Monday" />
-            <Picker.Item label="Tuesday" value="Tuesday" />
-            <Picker.Item label="Wednesday" value="Wednesday" />
-            <Picker.Item label="Thursday" value="Thursday" />
-            <Picker.Item label="Friday" value="Friday" />
-            <Picker.Item label="Saturday" value="Saturday" />
-            <Picker.Item label="Sunday" value="Sunday" />
-          </Picker>
-        </CardSection>
+        <EmployeeForm {...this.props} />
 
         <CardSection>
           <Button onPress={() => this.onButtonPress()}>
@@ -59,14 +26,6 @@ class AddEmployee extends Component {
     );
   }
 }
-
-const styles = {
-  pickerLabelStyle: {
-    fontSize: 18,
-    paddingLeft: 20,
-    flex: 1
-  }
-};
 
 const mapStateToProps = state => {
   const { name, phone, shift } = state.add;

@@ -12,7 +12,6 @@ export const employeeDetails = ({ prop, value }) => {
 
 export const employeeCreate = ({ name, phone, shift }) => {
   const { currentUser } = firebase.auth();
-  console.log(`/users/${currentUser.uid}/employees`);
 
   return (dispatch) => {
     firebase.database().ref(`/users/${currentUser.uid}/employees`)
@@ -33,4 +32,17 @@ export const employeeFetch = () => {
         dispatch({ type: FETCH_EMPLOYEE, payload: snapshot.val() });
       });
   });
+};
+
+export const employeeSave = ({ name, phone, shift, uid }) => {
+  const { currentUser } = firebase.auth();
+
+  return (dispatch) => {
+    firebase.database().ref(`/users/${currentUser.uid}/employees/${uid}`)
+      .set({ name, phone, shift })
+      .then(() => {
+        dispatch({ type: EMPLOYEE_CREATE });
+        Actions.employeeList({ type: 'reset' });
+      });
+  };
 };
